@@ -1,0 +1,19 @@
+name: fixture-check
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  fixture-check:
+    name: fixture-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate fixture
+        run: |
+          test ! -e .fixture-ci-fail
+          test -f src/greeting.txt
